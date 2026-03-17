@@ -151,10 +151,16 @@ authRouter.get('/user/reverseGeocode',async(req,resp)=>{
     `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json&zoom=17`,
      {
         headers: {
-          'User-Agent': 'MyAppName/1.0 (myemail@example.com)',
+        'User-Agent': 'AmanApp/1.0 (aman091299@gmail.com)',
         },
       }
   );
+if (!res.ok) {
+  return resp.status(res.status).json({
+    success: false,
+    message: `Nominatim API error: ${res.statusText}`
+  });
+}
   const data = await res.json();
      resp.status(200).json({
      success:true,
